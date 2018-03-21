@@ -1,5 +1,4 @@
-# Today I Learned
-## Dongwon's DailyCommit
+# Today I Learned ## Dongwon's DailyCommit
 배운 것들을 욕심부리지 않고 적을 수 있을 때까지 적어보자!
 
 180321 시작!
