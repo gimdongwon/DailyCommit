@@ -1,12 +1,10 @@
-### Today I Learned
+# Today I Learned
 
 ## Dongwon's DailyCommit
-
 배운 것들을 욕심부리지 않고 적을 수 있을 때까지 적어보자!
 
 180321 시작!
 
----
 
 ## 작성규칙
 
@@ -20,12 +18,12 @@
 
 ## 로컬에서 띄우기
 
----
 
+```
 - git add . or git add today's file
 
 - git commit -m "today's date"
 
 - git push
 
----
+```
