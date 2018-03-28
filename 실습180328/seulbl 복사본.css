@@ -1,0 +1,75 @@
+@charset:utf-8;
+
+*{
+	box-sizing: border-box;
+}
+
+.container{
+	width: 960px;
+	margin :0 auto;
+	}
+a{
+	text-decoration: none;
+	color: #181818;
+}
+ul{
+	list-style-type: none;
+}
+
+.header{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.section{
+	display: flex;
+	display: inline-block;
+}
+.gnb{
+	display: flex;
+	justify-content: flex-end;
+}
+
+.fieldset{
+	border: 0;
+}
+
+li{
+	margin-right: 10px;
+}
+
+ /*써치 받스 꾸미기*/
+
+
+
+#search{
+	width: 300px;
+}
+
+legend {
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    margin: -1px;
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+}
+
+input[type="search"] {
+        height: 35px;
+        width: 400px;
+        padding: 2px 2px 2px 10px;
+        border: 1px solid #666;
+        border-radius: 10px;
+    }
+
+    .btn-search {
+        height: 35px;
+        width: 50px;
+        border: 1px solid #988573;
+        color: #fff;
+        background-color: tan;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #666;
+    }
