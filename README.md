@@ -10,7 +10,11 @@
 
 * 문서 작성은 GitHub Edit 창 보다는 XCode, Deckset 등 에디터를 이용해 올린다.
 
+=> VSCode를 사용한다 여태껏 사용해본 것들중에는 제일 좋다.
+
 * 당연히 Iterm(Teminel을 이용해 업로드)
+
+=> 익숙해졌으니 소스트리를 사용해 본다.
 ---
 
 ## 로컬에서 띄우기
@@ -23,3 +27,11 @@
 - git push
 
 ```
+
+## Source tree
+
+1. 한번에 Commit Push 까지
+
+## 배우는 목록
+
+#Html, #Css, #Javascript
