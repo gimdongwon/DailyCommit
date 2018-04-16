@@ -36,3 +36,8 @@
 
 #Html, #Css, #Javascript
 
+---
+
+|  | DATE | CATEGORY | DESCRIPTION |
+|---|---|---|---|
+|  |20180417|Prototype|프로토 타입에 대한 이해 및 reduce사용법|
