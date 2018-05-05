@@ -106,4 +106,101 @@ JSX특징
 2. 변수 표현할 때에는{}사용.(ex. {text})
 3. style할때에는 key 가 camelcase인 객체가 사용되어야 한다. string 형식을 사용하지 않음.
 4. 주석 작성시에 /* ... */이다.
+
 <br><br>
+
+# 2.4 state
+
+1. 유동적인 데이터를 다룰떄 사용한다.
+2. jsx내부에서{this.state.stateName}
+3. 초기값 설정이 필수이다! 생성자에서 this.state = {}
+4. 갑을 수정할 떄는 this.setstate({}), 랜더링 다음에 this.state = 절대 사용하지 말것
+
+```js
+class Counter extends React.Component {
+  constructor(props){
+    super(props);
+  this.state = {
+    value:0
+  }
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick(){
+    this.setState({
+      value:this.state.value + 1
+    })
+  }
+  render() {
+    return (
+      <div>
+        <h2>{this.state.value}</h2>
+        <button onClick = {this.handleClick}>press</button>
+      </div>
+    );
+  }
+};
+class App extends React.Component {
+  render() {
+    return (
+      <Counter/>
+    );
+  }
+};
+```
+
+2.5 컴포넌트 매핑
+
+```js
+class ContactInfo extends React.Component {
+  render() {
+    return (
+      <div>{this.props.contact.name} {this.props.contact.phone}</div>
+    )
+  }
+}
+
+class Contact extends React.Component {
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      contactData: [
+        { name: 'Abet', phone: '010-0000-0001' },
+        { name: 'Betty', phone: '010-0000-0002' },
+        { name: 'Charlie', phone: '010-0000-0003' },
+        { name: 'David', phone: '010-0000-0004' }
+      ]
+    }
+    
+  }
+  render() {
+    
+    const mapToComponent = (data) => {
+      return data.map((contact, i) => {
+        return (<ContactInfo contact={contact} key={i}/>);
+      });
+    };
+    
+    
+    return (
+      <div>
+        { mapToComponent(this.state.contactData) }
+      </div>
+    );
+  }
+}
+
+class App extends React.Component {
+
+  render() {
+    return (
+      <Contact/>
+    );
+  }
+};
+
+ReactDOM.render(
+  <App></App>,
+  document.getElementById("root")
+);
+```
