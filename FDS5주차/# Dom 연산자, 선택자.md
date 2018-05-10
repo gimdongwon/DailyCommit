@@ -73,3 +73,5 @@ document.querySelector(".modal.wrong .close").addEventListener("click", () => {
 
 newStage();
 ```
+
+
