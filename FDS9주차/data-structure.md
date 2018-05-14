@@ -10,7 +10,7 @@
 - **먼저 집어넣은 데이터가 먼저 나옵니다.** 이 특징을 줄여서 FIFO(First In First Out)라고 부릅니다.
 - 데이터를 집어넣는 enqueue, 데이터를 추출하는 dequeue 등의 작업을 할 수 있습니다.
 
-<embed src="../images/queue.svg" onload="onKSLoad(this)" data-loop>
+![queue](http://ucsd-progsys.github.io/liquidhaskell-tutorial/img/queue.png)
 
 JavaScript에서는 배열을 이용해서 간단하게 큐를 구현할 수 있습니다.
 
@@ -46,7 +46,7 @@ queue.dequeue(); // 1
 - **나중에 집어넣은 데이터가 먼저 나옵니다.** 이 특징을 줄여서 LIFO(Last In First Out)라고 부릅니다.
 - 데이터를 집어넣는 push, 데이터를 추출하는 pop, 맨 나중에 집어넣은 데이터를 확인하는 peek 등의 작업을 할 수 있습니다.
 
-<embed src="../images/stack.svg" onload="onKSLoad(this)" data-loop>
+![stack](https://www.tutorialspoint.com/data_structures_algorithms/images/stack_representation.jpg)
 
 JavaScript에서는 배열을 이용해서 간단하게 스택을 구현할 수 있습니다.
 
@@ -74,13 +74,13 @@ stack.pop(); // 3
 ```
 
 스택은 서로 관계가 있는 여러 작업을 연달아 수행하면서 **이전의 작업 내용을 저장해 둘 필요가 있을 때** 널리 사용됩니다.
->##  되돌리기 기능 사용할때,
+>##  되돌리기 기능 사용할때 사용됨
 
 ## 트리 (Tree)
 
 트리(tree)는 여러 데이터가 **계층 구조** 안에서 서로 연결된 형태를 나타낼 때 사용됩니다.
 
-<embed src="../images/tree.svg">
+![tree](http://cfile9.uf.tistory.com/image/271EA63355097D67282D44)
 
 트리를 다룰 때 사용되는 몇 가지 용어를 살펴보겠습니다.
 
@@ -125,5 +125,7 @@ traverse(tree);
 트리는 계층 구조를 나타내기 위해, 또한 계층 구조를 통해 알고리즘의 효율을 높이고자 할 때 널리 사용됩니다.
 
 ## TIL
+
+알고리즘 공부할때 다뤘던 stack과 queue, tree이다. sort할때 사용했었지 stack은 후위 표기법때 사용했던 기억이 있다. queue도 마찬가지로 알고리즘 자료구조의 기초적인 개념이다. tree도 sort할때 힙정렬을 통해 사용을 했었다. 기억이 나는데 그때의 공부를 조금 더 열심히 하고 코드 까지 짤수 있었다면 좋았을 걸 하는 생각이 든다. 그래도 나는 비 전공자인 분들보다 조금은 더 알기 때문에 유리하다고 생각한다. 어렵지만 도전해 보자
 
 ## Reperence
