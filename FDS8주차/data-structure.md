@@ -36,6 +36,8 @@ queue.dequeue(); // 1
 
 큐는 **순서대로 처리해야 하는 작업을 임시로 저장해두는 버퍼(buffer)**로서 많이 사용됩니다.
 
+> ##  '_'쓰는 이유는 내가 숨기고 싶은 이유일때 unshift같은거 쓸까바임
+
 ## 스택 (Stack)
 
 스택(stack) 다음과 같은 성질을 갖는 자료형입니다.
@@ -60,7 +62,7 @@ class Stack {
     return this._arr.pop();
   }
   peek() {
-    return this._arr[this._arr.length - 1];
+    return this._arr[this._arr.length - 1]; // length 뒤 숫자를 바꾸면 여러 변수확인이 가능하다.
   }
 }
 
@@ -72,6 +74,7 @@ stack.pop(); // 3
 ```
 
 스택은 서로 관계가 있는 여러 작업을 연달아 수행하면서 **이전의 작업 내용을 저장해 둘 필요가 있을 때** 널리 사용됩니다.
+>##  되돌리기 기능 사용할때,
 
 ## 트리 (Tree)
 
