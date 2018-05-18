@@ -1,0 +1,29 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "content": "새할일",
+      "complete": true,
+      "userId": 1
+    },
+    {
+      "content": "새할일",
+      "complete": false,
+      "id": 2,
+      "userId": 1
+    },
+    {
+      "content": "JSON Study",
+      "complete": true,
+      "userId": "1",
+      "id": 3
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "dongwon",
+      "hobby": "computer"
+    }
+  ]
+}

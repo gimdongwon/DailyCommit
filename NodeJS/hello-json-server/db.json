@@ -1,0 +1,245 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "title": "Fast!!!",
+      "author": "Campus",
+      "id": 2
+    },
+    {
+      "title": "Fast!!!",
+      "id": 3
+    },
+    {
+      "title": "Fast!!!",
+      "id": 4
+    },
+    {
+      "title": "Fast!!!",
+      "id": 5
+    },
+    {
+      "title": "Fast!!!",
+      "id": 6
+    },
+    {
+      "title": "Fast!!!",
+      "id": 7
+    },
+    {
+      "title": "Fast!!!",
+      "id": 8
+    },
+    {
+      "title": "Fast!!!",
+      "id": 9
+    },
+    {
+      "title": "Fast!!!",
+      "id": 10
+    },
+    {
+      "title": "Fast!!!",
+      "id": 11
+    },
+    {
+      "title": "Fast!!!",
+      "id": 12
+    },
+    {
+      "title": "Fast!!!",
+      "id": 13
+    },
+    {
+      "title": "Fast!!!",
+      "id": 14
+    },
+    {
+      "title": "Fast!!!",
+      "id": 15
+    },
+    {
+      "title": "Fast!!!",
+      "id": 16
+    },
+    {
+      "title": "Fast!!!",
+      "id": 17
+    },
+    {
+      "title": "Fast!!!",
+      "id": 18
+    },
+    {
+      "title": "Fast!!!",
+      "id": 19
+    },
+    {
+      "title": "Fast!!!",
+      "id": 20
+    },
+    {
+      "title": "Fast!!!",
+      "id": 21
+    },
+    {
+      "title": "Fast!!!",
+      "id": 22
+    },
+    {
+      "title": "Fast!!!",
+      "id": 23
+    },
+    {
+      "title": "Fast!!!",
+      "id": 24
+    },
+    {
+      "title": "Fast!!!",
+      "id": 25
+    },
+    {
+      "title": "Fast!!!",
+      "id": 26
+    },
+    {
+      "title": "Fast!!!",
+      "id": 27
+    },
+    {
+      "title": "Fast!!!",
+      "id": 28
+    },
+    {
+      "title": "Fast!!!",
+      "id": 29
+    },
+    {
+      "title": "Fast!!!",
+      "id": 30
+    },
+    {
+      "title": "Fast!!!",
+      "id": 31
+    },
+    {
+      "title": "Fast!!!",
+      "id": 32
+    },
+    {
+      "title": "Fast!!!",
+      "id": 33
+    },
+    {
+      "title": "Fast!!!",
+      "id": 34
+    },
+    {
+      "title": "Fast!!!",
+      "id": 35
+    },
+    {
+      "title": "Fast!!!",
+      "id": 36
+    },
+    {
+      "title": "Fast!!!",
+      "id": 37
+    },
+    {
+      "title": "Fast!!!",
+      "id": 38
+    },
+    {
+      "title": "Fast!!!",
+      "id": 39
+    },
+    {
+      "title": "Fast!!!",
+      "id": 40
+    },
+    {
+      "title": "Fast!!!",
+      "id": 41
+    },
+    {
+      "title": "Fast!!!",
+      "id": 42
+    },
+    {
+      "title": "Fast!!!",
+      "id": 43
+    },
+    {
+      "title": "Fast!!!",
+      "id": 44
+    },
+    {
+      "title": "Fast!!!",
+      "id": 45
+    },
+    {
+      "title": "Fast!!!",
+      "id": 46
+    },
+    {
+      "title": "Fast!!!",
+      "id": 47
+    },
+    {
+      "title": "Fast!!!",
+      "id": 48
+    },
+    {
+      "title": "Fast!!!",
+      "id": 49
+    },
+    {
+      "title": "Fast!!!",
+      "id": 50
+    },
+    {
+      "title": "Fast!!!",
+      "id": 51
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    },
+    {
+      "body": "댓글옛다",
+      "postId": "1",
+      "id": 2
+    },
+    {
+      "body": "댓글옛다",
+      "postId": "1",
+      "id": 3
+    },
+    {
+      "body": "댓글옛다",
+      "postId": "1",
+      "id": 4
+    },
+    {
+      "body": "댓글옛다",
+      "postId": "1",
+      "id": 5
+    },
+    {
+      "body": "댓글옛다",
+      "postId": "1",
+      "id": 6
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
