@@ -1,0 +1,77 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "fds",
+      "hashedPassword": "$2a$10$Ym17ufSes6t2SV.gZ4dEdeIop2sXDggDl2A84X/KCsEtY3/IVJBJe"
+    },
+    {
+      "username": "sdf",
+      "hashedPassword": "$2a$10$0N2A2wZ6NZ1mKyBZFIN9K.K0dKAPv3H3eG/10BFCTj3Pxb4ynwJwi",
+      "id": 2
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "title": "Hello FDS JSON Server :)",
+      "body": "..."
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "title": "hihihihi mynameis dongwon"
+    },
+    {
+      "title": "뭉이형 안옴",
+      "body": "1시간 남앗드아~!",
+      "userId": 2,
+      "id": 3
+    },
+    {
+      "title": "뭉이형 안옴",
+      "body": "1시간 남앗드아~!",
+      "userId": 2,
+      "id": 4
+    },
+    {
+      "title": "뭉이형 안옴",
+      "body": "1시간 남앗드아~!",
+      "userId": 2,
+      "id": 5
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "userId": 1,
+      "postId": 1,
+      "body": "🍺🎉"
+    },
+    {
+      "body": "reple",
+      "postId": "1",
+      "userId": 2,
+      "id": 3
+    },
+    {
+      "body": "reple",
+      "postId": "1",
+      "userId": 2,
+      "id": 4
+    },
+    {
+      "body": "인제되냐?",
+      "postId": "2",
+      "userId": 2,
+      "id": 5
+    },
+    {
+      "body": "인제되냐고",
+      "postId": "2",
+      "userId": 2,
+      "id": 6
+    }
+  ]
+}
