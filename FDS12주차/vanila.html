@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1 class="vanila">바닐라맛 아이스크림</h1>
+    <div class="number">0</div>
+    <button data-btnType="inc" class="plus">+</button>
+    <button data-btnType="dec" class="minus">-</button>
+
+
+    <script>
+        const count = document.querySelector(".number")
+        const btnList = document.querySelectorAll('button')
+
+        function inc() {
+            return count.textContent = parseInt(count.textContent) + 1
+        }
+
+        function dec() {
+            return count.textContent = parseInt(count.textContent) - 1
+        }
+
+        btnList.forEach(btn => btn.addEventListener('click', () => {
+            btn.dataset.btntype === 'inc' ? inc() : dec();
+        }))
+    </script>
+</body>
+
+</html>
