@@ -487,21 +487,21 @@ dependencies 는 항상 설치되고 devDepenencies 는 --production 옵션을 �
 
 npm install “$package” 명령어로 설치할 때는 --dev 옵션을 붙여야지만 설치된다.
 
-# 180705 시작 
+# 180705 시작
 
-1. redux 복습
-2. ducks 패턴 연습하기
-3. redux를 이용한 비동기 액션 사용
+1.  redux 복습
+2.  ducks 패턴 연습하기
+3.  redux 를 이용한 비동기 액션 사용
 
-## Redux의 특징 : 하나의 객체에서 관리한다
+## Redux 의 특징 : 하나의 객체에서 관리한다
 
-store하나에 전부 저장할수 없으니깐
+store 하나에 전부 저장할수 없으니깐
 
 좀 나누자 하고 여러가지 패턴이 나왓는데 그중 하나가 ducks
 
 ## ducks
 
-ducks의 약점 : 여러 리듀서에 영향을 미치는 관리를 하기가 쉽지 않다.
+ducks 의 약점 : 여러 리듀서에 영향을 미치는 관리를 하기가 쉽지 않다.
 
 # 비동기 액션
 
@@ -517,3 +517,6 @@ ducks의 약점 : 여러 리듀서에 영향을 미치는 관리를 하기가 �
 
 redux-thunk
 
+# 참고 사이트
+
+[리덕스 한국어 번역문서](https://deminoth.github.io/redux/)
