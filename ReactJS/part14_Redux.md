@@ -119,3 +119,101 @@ function todoApp(state = initialState, action){
 Redux 애플리케이션은 하나 또는 그 이상의 리듀서를 둘 수 있다. 액션을 호출할 때마다 모든 리듀서가 호출된다. 리듀서는 스토어의 데이터 변경에 대한 책임이 있으므로 특정한 형식의 액션을 다룰 때는 주의해야한다.
 
 일반적으로 리듀서는 상태와 액션을 인자로 받는 함수다. 예를 들어 영화정보를 가져오도록 하는 액션이 있다면 이때 리듀서를 사용한다. 액션 코드는 액션이 현재 상태를 다음 상태로 변환하는 과정(상태에 영화를 추가하는 과정)을 설명한다. 리듀서 함수는 액션을 처리하는 거대한 switch/case 문이다. 그렇지만 리듀서를 좀 더 함수형 프로그래밍적이고, 읽기 편하게 해주는 라이브러리도 있다. redux-actions라는 라이브러리를 이용해서 switch/case문을 대체하는 법을 살펴볼 것이다.
+
+### 14.3.1 Redux를 이용한 넷플릭스 따라잡기
+
+명작 영화 목록을 보여주는 넷플릭스 앱을 만들어보자. 앱은 영화를 격자로 보여주고, 영화 포스터를 클릭하면 영화에 대한 정보를 자세히 보여준다
+이번 예제의 목표는 Redux를 사용해서 실시간으로 React 컴포넌트에 데이터를 공급하는 방법을 배우는 것이다. 단순한 예제이므로 데이터는 별도의 데이터서비스 없이 JSON파일에서 불러올 것이다. 또한, 이전 장에서 살펴본 React Route을 이용해서 각 영화의 상세 정보 화면으로 이동할 수 있게 할 것이다.
+
+이 프로젝트에서는 3개의 컴포넌트, 즉 APP, Movies, Movie를 새엇ㅇ한다. 코드 정리를 위해 컴포넌트 별로 CSS파일이 있고 개별 폴더를 갖는다(React컴포넌트와 스타일을 캡슐화하는 모범사례이기도 하다.)
+
+이제 프로젝트 폴더 구조의 준비를 마쳤다. 의존 모듈과 빌드 설정에 대해서 살펴보자.
+
+### 14.3.2 의존 모듈과 빌드 설정
+
+이 프로젝트에는 다수의 의존 모듈을 설치해야 한다. Webpack을 이용해서 모든 파일을 번들링하여 실시간으로 사용하고, extract-text-webpack-pulgin이라는 플러그인을 추가하여 여러개의 style 태그로 입력되었던 인라인CSS를 style.css파일로 만든다. 이 프로젝트에 사용할 Webpack 로더는 다음과 같다.
+
+- json-loader
+- style-loader
+- css-loader
+- babel-loader
+
+그 외으 ㅣ프로젝트 개발 의존 모듈을 살펴보면 다음과 같다.
+
+- Babel과 프리셋은 ES6코드를 브라우저에서 사용할 수 있는 ES5 자바스크립트 파일로 변환한다. babel-polyfill을 브라우저에 ES2015 환경을 갖추기 위해 사용하고, babel-preset-es2015는 ES6/ES2016, babel-preset-stage-0은 최신 ES7+ 기능을 제공하며, babel-preset-react는 JSX를 위해 사용한다.
+- react-router는 현재 URL에 기반을 두어 컴포넌트의 계층을 보여준다. 또한, URL위치를 기반으로 컴포넌트 계층으로 배열하는 데 도움이 된다.
+- redux-actions는 리듀서를 정리한다.
+- ESLint와 플러그인은 자바스크립트와 JSX의 스타일을 적절하게 유지하기 위한 도구다
+- concurrently는 Webpack 빌드와 같은 프로세스를 동시에 실행할 수 있게 해주는 Node.js도구다.
+
+package.json파일은 모든 의존 모듈 목록과 Babel설정, npm 스크립트를 포함하며, 다음 예제 코드 14.1과 같다. npm i 모듈명으로 모듈을 직접 설치할 수도 있고, package.json을 생성하거나 복사해서 npm i ㅗㄹ 모듈을 설치할 수도 있다. package.json에 표시된 정확한 버전의 라이브러리를 사용하지 않으면 예제 코드가 정상적으로 작동하지 않을 수 있다.
+
+의존 모듈을 번들링할 때 Webpack을 사용하므로 모든 필요한 패키지가 bundle.js에 포함된다. 따라서 모든 의존 모듈을 devDependencies에 추가한다.(배포환경에서 사용되지 않는 모듈이 불필요하게 배포되어 보안이 취약해지기 때문이다.) npm 은 npm i --production처럼 명령에 --production프래그가 설정되어 있을 때는 devDependencies를 무시한다.
+
+다음으로 webpack.config.js를 생성해서 빌드과정을 정의해 보자.
+
+### 14.3.3 Redux 사용하기
+
+React 애플리케이션에서 Redux를 작동시키려면 컴포넌트 계층의 최상위에 Provider컴포넌트를 추가해야 한다. Provider 컴포넌트는 react-redux 패키지의 일부로 스토어의 데이터를 컴포넌트로 주입해준다. 즉, Provider 컴포넌트를 사용하면 모든 자식 컴포넌트가 스토어에 접근할수 있는 것이다. 깔금하다.
+
+Provider 컴포넌트를 사용하려면 store속성으로 스토어를 전달해야 한다. 스토어는 애플리케이션 상태를 표현하는 객체다. Redux의 createStore()메서드는 index.js의 리듀서를 전달받아 스토어 객체를 반환한다.
+
+Provider 컴포넌트와 하위 트리의 컴포넌트를 렌더링할 때는 react-dom의 render() 메서드를 사용한다. <Provider>를 첫번 째 인자로 받아 두번째 인자로 전달한 요소(document.getElementById('app'))안에 렌더링한다.
+
+위에서 살펴본 내용을 종합하여 애플리케이션의 진입점 파일을 작성하면 다음 예제 코드와 같다. JSX포멧을 이용해서 Provider 컴포넌트를 정의하고 리듀서를 전달받은 스토어 인스턴스를 넘겨준다.
+
+```js
+const React = require("react");
+const {render} = require("react-dom");
+const { Provider} = require("react-redux");
+const {createStore} = require("redux");
+const reducers = require("./modules");
+const routes = require("./routes.js");
+
+module.exports = render(
+  <Provider store={createStore(reducers)}>{routes}</Provider>
+  document.getElementById("app")
+);
+```
+
+전체 애플리케이션이 Redux의 기능을 사용하려면 스토어에 연결하는 코드처럼 자식 컴포넌트에서 구현해야 할 코드가 있다. react-redux의 connect()메서드는 몇가지 인자를 전달받아 함수를 반환한다. connect() 메서드가 반환한 함수로 컴포넌트를 감싸서 스토어의 일부를 컴포넌트의 속성으로 전달받게 된다.
+
+여기까지 index.js작성을 마쳤다. Provider컴포넌트가 스토어로부터 연결된 컴포넌트로 데이터 전달을 처리하므로 속성을 직접 전달할 필요가 없다. 그렇지만 아직 라우팅, 리듀서, 액션 등에 대해서 살펴보지 않았다.
+
+### 14.3.4 라우팅
+
+react-router를 사용하면 브라우저의 경로에 따라 컴포넌트 계층을 정의할 수 있다. 13장에서 React Router를 살펴보았으므로 이미 익숙한 내용이라고 생각한다. 13장에서 React Router는 클라이언트 측의 라우팅을 위해 사용되었다. React 라우팅은 서버측 라우팅과 밀접하게 연결되어 있지는 않지만, 경우에 따라서 서버 측에서도 필요할 수 있는데, 이에 대해서는 16장에서 살펴보자
+
+React Router의 핵심은 모든 경로를 여러 개의 중첩도니 Router 컴포넌트로 선언할 수 있다는 것이다. 각 Router 컴포넌트는 다음과 같이 두가지 속성을 전달받는다.
+
+- path: URL 경로 또는 위치로 URL 매개변수를 포함할 수 있다. 예를 들면 loaclhost:8080/movies/1021은 movies:/id를 path로 사용할 수 있다. /를 사용하면 부모 Route 컴포넌트에 설정된 path와 상관없이 독립적인 경로를 사용할 수 있다. 이를테면 localhost:8080/1012 같은 경로에 대해 /:id를 path로 지정할 수 있다.
+
+- component: 사용자가 해당 경로 또는 위치로 접근했을 때 렌더링할 컴포넌트에 대한 참조다. Provider 컴포넌트를 포함한 모든 부모 컴포넌트가 렌더링될 것이다. 예를 들어 예제 코드 14.4 에서 localhost:8080/movies/1021로 접근하면 Movie, Movies.App컴포넌트를 렌더링한다.
+
+최상위 페이지와 /movies 페이지에서 모두 영화 포스터 목록을 보여주어야 한다. 또한, /movies/:id로 접근하면 영화에 대한 상세 정보를 보여주어야 한다. 다음 예제에서는 라우팅 설정에 IndexRoute를 사용한다.
+
+```js
+const React = require('react')
+const{
+  Router,
+  Route,
+  IndexRoute,
+  broserHistory
+} = require('react-router')
+const App = require('components/app/app.js')
+const Movies = require('components/movies/movies.js')
+const Moive = require('components/movie/movie.js')
+
+modul.exports = (
+  <Router history={browserHistory}>
+    <Route path="/" component={App}>
+      <IndexRoute component={App} />
+      <Route path="movies" component={Movies}>
+        <Route path=":id" component={Movie} />
+      </Route>
+    </Route>
+  </Router>
+)
+```
+
+IndexRoute와 Route는 모두 최상위 Route 컴포넌트 안에 중첩되어 있다. 이렇게 하면 Movies 컴포넌트가 최상위 페이지와 /movies 페이지에서 모두 렌더링 된다. 개별 영화 뷰는 특정 영화 정보를 Redux스토어에서 가져오기 위해 영화 ID가 필요하므로 경로를 정의할 때 URL 매개변수를 사용해야 한다. 경로에 콜론을 이용하여 path=":id"로 작성한다. 작은 창에서 반응형 CSS가 적용되어 나타나는 개별 영화 뷰의 모습과 URL이다. URL의 movies/8에서 8이 영화 ID다. 다음으로 Redux리듀서를 이용해 데이터를 가져오는 방법을 살펴보자.
