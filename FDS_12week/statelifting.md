@@ -231,19 +231,19 @@ class TemperatureInput extends React.Component {
 
 예를 들어, 섭씨 입력 필드에 37 을 입력하게 되면 Calculator 컴포넌트의 state 는 아래와 같이 될것이다.
 
-```
+```json
 {
-  temperature: '37',
-  scale: 'c'
+  "temperature": "37",
+  "scale": "c"
 }
 ```
 
 화씨 입력 필드의 값을 212 로 고치면, Calculator 의 상태는 아래와 같이 될 것이다.
 
-```
+```json
 {
-  temperature: '212',
-  scale: 'f'
+  "temperature": "212",
+  "scale": "f"
 }
 ```
 
