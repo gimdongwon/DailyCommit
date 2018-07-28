@@ -47,7 +47,7 @@ function WarningButton() {
 }
 ```
 
-만약 JavaScript 번들러를 사용하지 않고 <script />태그를 통하여 React 를 불러왔다면, 이미 라이브러리가 React 전역 변수로서 스코프에 존재하므로 별도의 처리를 해줄 필요가 없다.
+만약 JavaScript 번들러를 사용하지 않고 script 태그를 통하여 React 를 불러왔다면, 이미 라이브러리가 React 전역 변수로서 스코프에 존재하므로 별도의 처리를 해줄 필요가 없다.
 
 ## JSX 타입을 위한 점 표기법 사용하기
 
@@ -235,4 +235,183 @@ const App = () => {
     </div>
   );
 };
+```
+
+위 예제에서는 kind prop 이 완전하게 추출되었고 DOM 의 button 요소로는 전달되지 않았다. 다른 모든 prop 들은 ...other 객체를 통해 전달되었고, 이 방법을 통해 컴포넌트를 굉장히 유연하게 만들 수 있다. onClick 과 children prop 가 넘겨진 모습을 확인해 보자.
+
+소성 펼치기 기법은 유용하게 사용될 수 있지만, 불필요한 props 혹은 틀린 어트리뷰트를 컴포넌트에 넘기게 되는 일이 생기기 쉽다는 단점도 있다. 이 기법은 꼭 필요할 때만 사용하자.
+
+## JSX 에서 자식 다루기
+
+여는 태그와 닫는 태그가 모두 있는 JSX 표현식에서, 둘 사이에 들어있는 내용은 props.children 라는 특별한 prop 으로서 컴포넌트에 넘겨진다. 자식을 넘겨주는 방법에는 여러가지가 있다.
+
+## 문자열 리터럴
+
+여는 태그와 닫는 태그 사이에 문자열을 써 넣을 수 있고, 이때 props.children 는 그냥 문자열이 된다. 이런 식으로 많은 내장 HTML 엘리먼트를 사용할 수 있다.
+
+`<MyComponent>Hello world!</MyComponent>`
+
+이는 유효한 JSX 이며, MyComponent 의 props.children 는 간단하게 "Hello world!" 가 된다. HTML 이스케이핑이 풀리게 되므로, 일반적으로 보통의 HTML 을 사용하듯이 JSX 를 쓸 수 있게 된다.
+
+`<div>This is vaild HTML &amp; JSX at the same time.</div>`
+
+JSX 는 각 줄의 처음과 끝에 있는 공백을 제거한다. 또한 빈 줄도 삭제한다. 태그에 붙어있는 개행 역시 삭제 된다. 문자열 리터럴 중간에 등장하는 여러 개의 개행은 한 개의 공백으로 줄어든다. 따라서 아래의 예제들은 모두 같은 결과를 렌더링한다.
+
+```js
+<div>Hello World</div>
+
+<div>
+  Hello World
+</div>
+
+<div>
+  Hello
+  World
+</div>
+
+<div>
+
+  Hello World
+</div>
+```
+
+## JSX 를 자식으로 사용하기
+
+JSX 엘리먼트를 자식으로 넘겨줄 수도 잇따. 이는 중첩된 컴포넌트를 보여주고 싶을 때 유용하다.
+
+```js
+<MyContainer>
+  <MyFirstComponent />
+  <MySecondComponent />
+</MyContainer>
+```
+
+여러 형태의 자식을 섞어서 쓸 수 있다. 따라서 JSX 자식과 함께 문자열 리터럴을 사용할 수 있다. 이는 JSX 가 HTML 과 닮은 부분이다. 아래 예제는 유효한 JSX 이며 또한 유효한 HTML 이다
+
+```js
+<div>
+  Here is a list:
+  <ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+  </ul>
+</div>
+```
+
+React 컴포넌트는 엘리먼트로 이루어진 배열 역시 반환할 수 있다.
+
+```js
+render(){
+  return [
+    <li key="A">First Item</li>
+    <li key="B">Second Item</li>
+    <li key="C">Third Item</li>
+  ]
+}
+```
+
+## JavaScript 표현식을 자식으로 사용하기
+
+{}으로 둘러싼 JavaScript 표현식은 모두 자식이 될 수 있다. 예를 들어, 다음 표현식들은 완전히 같다.
+
+```js
+<MyComponent>foo</MyComponent>
+
+<MyComponent>{'foo'}</MyComponent>
+```
+
+이 방법은 JSX 표현식을 요소로 갖는 임의 길이의 배열을 렌더링하고 싶을 때 유용하게 사용할 수 있다. 예를 들어 아래의 예제는 HTML 리스트를 렌더링한다.
+
+```js
+funtcion Item(props){
+  return <li>{props.message}</li>;
+}
+
+function TodoList(){
+  const todos = ['finish doc', 'submit pr', 'nag dan to review'];
+  return (
+    <ul>
+      {todos.map(message)=> <Item key={message} message= {message} />}
+    </ul>
+  )
+}
+```
+
+JavaScript 표현식은 다른 형태의 자식과 어울려 사용될 수 있다. 이 기능은 문자열 템플릸 대신 자주 사용한다.
+
+```js
+function Hello(props) {
+  return <div>Hello {props.addressee}!</div>;
+}
+```
+
+## 함수를 자식으로 사용하기
+
+보통 JSX 내에 삽입된 JavaScript 표현식은 문자열, React 엘리먼트, 또는 이들로 이루어진 배열이다. 그러나 props.children 는 다른 prop 들과 같은 방시긍로 동작하며 어떤 형태의 데이터도 넘겨질 수 있다. React 가 렌더링할 수 없는 것들도 포함해서다. 예를 들어 여러분이 직접 만든 컴포넌트에서 아래와 같이 콜백을 props.children 로 넘겨받을 수도 있다.
+
+```js
+function Repeat(props) {
+  let item = [];
+  for (let i = 0; i < props.numTimes; i++) {
+    item.push(props.children(i));
+  }
+  return <div>{items}</div>;
+}
+
+function ListOfTenThigs() {
+  return (
+    <Repeat numTiems={10}>
+      {index => <div key={index}>This is item {index} ind the list</div>}
+    </Repeat>
+  );
+}
+```
+
+직접 만든 컴포넌트에는 어떤 것이든 자식으로 넘겨줄 수 있고, 그것을 React 가 이해할 수 잇는 형태로 변환한 후 렌더링 해줄 수 있다. 이런 사용법이 흔하지는 않지만, JSX 의 기능을 확장시키길 원한다면 이 방법을 사용할 수 있다.
+
+## 진리값, null, undefined 는 무시된다.
+
+false, null, undefined true 는 유효한 자식이다. 그저 렌더링 되지 않을 뿐이다. 아래 JSX 표현식은 모두 같은 결과를 렌더링 한다.
+
+```js
+<div />
+
+<div></div>
+
+<div>{false}</div>
+
+<div>{null}</div>
+
+<div>{undefined}</div>
+
+<div>{true}</div>
+```
+
+이 성질은 React 엘리먼트를 조건부 렌더링하고 싶을 때 유용하게 사용된다. 아래 JSX 는 showHeader 가 true 일 때에만 Header 를 렌더링한다.
+
+```js
+<div>
+  {showHeader && <Header />}
+  <Content />
+</div>
+```
+
+한가지 주의해야 할 점은 0 과 같은 몇몇 "falsy"값들이 여전히 React 에 의해 렌더링 될 수 있다는 점이다. 예를 들어, 아래 코드는 우리가 기대한 대로 동작하지 않을 것이다. props.messages 이 빈 배열인 경우에 0 이 출력될 것이다.
+
+```js
+<div>{props.messages.length && <MessageList message={props.messages} />}</div>
+```
+
+이를 고치려면 && 앞의 표현식이 언제나 진리 값이 되도록 만들어야 한다.
+
+```js
+<div>
+  {props.messages.length > 0 && <MessageList messages={props.messages} />}
+</div>
+```
+
+반대로 false, true, null, undefined 를 출력시키고 싶다면, 먼저 문자열로 변환해야 한다.
+
+```js
+<div>My JavaScript variable is {String(myVariable)}.</div>
 ```
