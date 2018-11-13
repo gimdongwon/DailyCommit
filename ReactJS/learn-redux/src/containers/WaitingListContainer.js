@@ -41,8 +41,8 @@ class WaitingListContainer extends Component {
 }
 
 const mapStateToProps = ({ waiting }) => ({
-  input: waiting.get("input"),
-  list: waiting.get("list")
+  input: waiting.input,
+  list: waiting.list
 });
 
 const mapDispatchToProps = dispatch => ({

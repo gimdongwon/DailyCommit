@@ -8,19 +8,19 @@ export const changeColor = color => ({ type: CHANGE_COLOR, color });
 export const increment = () => ({ type: INCREMENT });
 export const decrement = () => ({ type: DECREMENT });
 
-const initialState = Map({
+const initialState = {
   color: "red",
   number: 0
-});
+};
 
 export default function counter(state = initialState, action) {
   switch (action.type) {
     case CHANGE_COLOR:
-      return state.set("color", action.color);
+      return { ...state, color: action.color };
     case INCREMENT:
-      return state.update("number", number => number + 1);
+      return { ...state, number: state.number + 1 };
     case DECREMENT:
-      return state.update("number", number => number - 1);
+      return { ...state, number: state.number - 1 };
     default:
       return state;
   }

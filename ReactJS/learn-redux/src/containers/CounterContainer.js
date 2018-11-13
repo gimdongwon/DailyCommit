@@ -25,8 +25,8 @@ class CounterContainer extends Component {
 }
 
 const mapStateToProps = ({ counter }) => ({
-  color: counter.get("color"),
-  number: counter.get("number")
+  color: counter.color,
+  number: counter.number
 });
 
 // const mapDispatchToProps = dispatch => ({
