@@ -18,7 +18,7 @@ class PaletteContainer extends Component {
 
 // store value into props
 const mapStateToProps = state => ({
-  color: state.counter.color
+  color: state.counter.get("color")
 });
 
 // action function into props
