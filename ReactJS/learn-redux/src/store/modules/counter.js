@@ -3,10 +3,12 @@ import produce from "immer";
 const CHANGE_COLOR = "counter/CHANGE_COLOR";
 const INCREMENT = "counter/INCREMENT";
 const DECREMENT = "counter/DECREMENT";
+const MULTIPLY = "counter/MULTIPLY";
 
 export const changeColor = color => ({ type: CHANGE_COLOR, color });
 export const increment = () => ({ type: INCREMENT });
 export const decrement = () => ({ type: DECREMENT });
+export const multiply = () => ({ type: MULTIPLY });
 
 const initialState = {
   color: "red",
@@ -30,6 +32,11 @@ export default function counter(state = initialState, action) {
       return produce(state, draft => {
         draft.number--;
       });
+    case MULTIPLY:
+      return { ...state, number: state.number * 2 };
+    // return produce(state, draft => {
+    //   draft.number ** 2;
+    // });
     default:
       return state;
   }

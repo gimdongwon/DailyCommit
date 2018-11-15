@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Counter from "../components/Counter";
-import { increment, decrement } from "../store/modules/counter";
+import { increment, decrement, multiply } from "../store/modules/counter";
 
 class CounterContainer extends Component {
   handleIncrement = () => {
@@ -9,6 +9,9 @@ class CounterContainer extends Component {
   };
   handleDecrement = () => {
     this.props.decrement();
+  };
+  handleMultiply = () => {
+    this.props.multiply();
   };
 
   render() {
@@ -19,6 +22,7 @@ class CounterContainer extends Component {
         value={number}
         onIncrement={this.handleIncrement}
         onDecrement={this.handleDecrement}
+        onMultiply={this.handleMultiply}
       />
     );
   }
@@ -35,7 +39,7 @@ const mapStateToProps = ({ counter }) => ({
 // bindActionCreators({increment, decrement}, dispatch);
 // });
 
-const mapDispatchToProps = { increment, decrement };
+const mapDispatchToProps = { increment, decrement, multiply };
 
 export default connect(
   mapStateToProps,
