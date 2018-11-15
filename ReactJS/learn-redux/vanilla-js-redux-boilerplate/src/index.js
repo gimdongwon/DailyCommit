@@ -23,11 +23,15 @@ const initialState = {
   counter: 0
 };
 
-// 리듀서 설정
+// 리듀서 설정 변화를 일으키는 함수
 function reducer(state = initialState, action) {
+  // 파라미터로는 state와 action을 받아옴
+  // 이 함수는 화살표 함수로 받아와도 되고 일반 함수로 받아와도 된다.
+  // state가 처음 불러졌을 때 undefined를 방지하기 위해 initialState를 초기 값으로 설정해줘서 불러옴
   switch (action.type) {
     case TOGGLE_SWITCH:
       return {
+        // 리듀서는 불변성을 유지하면서 변화를 불러와야되기 때문에 ...state로 받고 light에 변화를 줌
         ...state, // 기존의 값을 그냥 두면서 leave the existing values behind
         light: !state.light // light 값 변경 시키기 change light value
       };
@@ -69,15 +73,14 @@ render();
 //  subscribe
 store.subscribe(render);
 
-// create aciton 
+// create aciton
 
-switchButton.onclick = () =>{
+switchButton.onclick = () => {
   store.dispatch(toggleSwitch());
-}
-plusButton.onclick = () =>{
+};
+plusButton.onclick = () => {
   store.dispatch(increment(5));
-}
-minusButton.onclick = () =>{
+};
+minusButton.onclick = () => {
   store.dispatch(decrement(5));
-}
-
+};
