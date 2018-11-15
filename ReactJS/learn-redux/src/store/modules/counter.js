@@ -1,4 +1,5 @@
 import produce from "immer";
+import { createAction } from "redux-actions";
 
 const CHANGE_COLOR = "counter/CHANGE_COLOR";
 const INCREMENT = "counter/INCREMENT";
@@ -8,7 +9,8 @@ const MULTIPLY = "counter/MULTIPLY";
 export const changeColor = color => ({ type: CHANGE_COLOR, color });
 export const increment = () => ({ type: INCREMENT });
 export const decrement = () => ({ type: DECREMENT });
-export const multiply = () => ({ type: MULTIPLY });
+// export const multiply = () => ({ type: MULTIPLY });
+export const multiply = createAction(MULTIPLY);
 
 const initialState = {
   color: "red",
