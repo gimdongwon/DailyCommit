@@ -2,6 +2,47 @@
 
 페이스북에서 만든 레이어 쿼리 언어로써 기존의 웹 혹은 모바일 어플리케이션의 API를 구현할 때는, 통상적으로 REST API가 사용되는데 기존의 REST API를 사용하여 API를 구현한다면, 우리가 클라이언트 사이드에서 어떠한 기능이 필요할 때마다 그때그때 새로운 API를 만들어주어야 했다.
 
+## Graphql은 왜 탄생하게 되었는가?
+
+- Restful API에서는 다양한 기종에서 필요한 정보들을 일일이 구현하는 것이 힘들었다.
+- 예로, ios와 android에서 필요한 정보들이 조금씩 달랐고, 그 다른 부분마다 API를 구현하는 것이 힘들었다.
+
+## graphql 과 restful 의 차이점
+
+1. 하나의 endpoint를 이용한다.
+2. 요청할 때 사용한 query문에 따라 응답의 구조가 달라진다.
+
+## graphql의 장점
+
+1. HTTP요청의 횟수를 줄일 수 있다.
+
+- Restful은 resource마다 endpoint가 있어 종류별로 요청을 해야하고, 따라서 요청 횟수가 필요한 Resource의 종류에 비례한다.
+
+2. HTTP응답의 size를 줄일 수 있다.
+   - Restful은 응답의 형태가 정해져있고 따라서 필요한 부분에 대한 부분적 요청이 불가하나, graphql은 원하는대로 요청하는 것이 가능하다.
+
+## graphql의 단점
+
+1. 파일 전송등 text만으로 하기 힘든 내용들을 처리하기 복잡하다.
+2. 고정된 요청과 응답만 필요한 경우에는 Query로 인해 요청의 크기가 Rest API보다 더 커진다.
+3. 재귀적인 Query가 불가능하다.(응답의 길이가 너무 깊으면 API를 만들 수 없다.)
+
+## Graphql vs Restful API
+
+- Graphql
+
+  1. 서로 다른 모양의 다양한 요청들에 대해 응답할 때
+  2. 대부분의 요청이 CRUD에 해당할 때
+
+- Restful API
+  1. HTTP, HTTPS에 의한 caching을 잘 사용하고 있을 때
+  2. file전송등 단순한 text로 처리되지 않는 요청이 있을 때
+  3. 요청의 구조가 정해져있을 때
+
+=> 둥줄에 하나를 굳이 선택할 필요는 없다 적제 적소에 사용할 것
+
+> 주의해야할 것은 하나의 목표를 위해 두 API structure 를 섞어놓는 것은 API 의 품질을 떨어트릴 수 있다는 점이다.
+
 만약에 다음과 같이 클라이언트 측에서 쿼리를 만들어서 서버로 보내면 우리가 원하는대로 결과를 반환해주면 어떨까
 
 ```sql
@@ -416,7 +457,3 @@ input object type을 variables기능에서 mutation과 함께 다음과 같이 �
 ## 참고자료
 
 velopert, [vomvoru blog](https://vomvoru.github.io/blog/about-GraphQL/)
-
-```
-
-```
