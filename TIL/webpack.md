@@ -81,10 +81,3 @@ Webpack은 JS어플리케이션을 위한 Package Bundler이고 목적은 종속
 Webpack은 크게 Entry, Output, Loader, Plug-In 이 4가지로 나눌 수 있다.
 
 위에 참조
-
-<<<<<<< Updated upstream
-이렇게 수정한다면?
-=======
-음~
-크흠..
->>>>>>> Stashed changes
